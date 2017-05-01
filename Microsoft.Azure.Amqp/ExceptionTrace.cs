@@ -215,7 +215,7 @@ namespace Microsoft.Azure.Amqp
                         // This is intended to "crash" the process so that a debugger can be attached.  If a managed
                         // debugger is already attached, it will already be able to hook these exceptions.  We don't
                         // want to simulate an unmanaged crash (DebugBreak) in that case.
-                        if (!Debugger.IsAttached && !UnsafeNativeMethods.IsDebuggerPresent())
+                        if (!Debugger.IsAttached && Environment.OSVersion.Platform == PlatformID.Win32NT && !UnsafeNativeMethods.IsDebuggerPresent())
                         {
                             Debugger.Launch();
                         }

@@ -30,6 +30,7 @@ namespace Microsoft.Azure.Amqp.Transport
 
 #if MONOANDROID
             // Work around for Mono issue: https://github.com/rabbitmq/rabbitmq-dotnet-client/issues/171
+            // NOTE: this is fixed in Mono 5.0+: https://github.com/mono/mono/commit/64a055b079ec21f4251ab0fa6e9e9eb353d2866f
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             bool connectResult = socket.ConnectAsync(connectEventArgs);
 #else

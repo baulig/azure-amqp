@@ -51,14 +51,24 @@ namespace Microsoft.Azure.Amqp.Transport
             }
         }
 
+        // Mono's TLS stack (as of 5.0) always calls sync methods on inner streams
+        static bool isMono = System.Type.GetType("Mono.Runtime") != null;
+
         public override void Flush()
         {
-            throw new InvalidOperationException();
+            if (!isMono)
+            {
+                throw new InvalidOperationException();
+            }
         }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-#if MONOANDROID
+            if (!isMono)
+            {
+                throw new InvalidOperationException();
+            }
+
             int result = 0;
             using (var doneEvent = new ManualResetEventSlim())
             {
@@ -67,23 +77,21 @@ namespace Microsoft.Azure.Amqp.Transport
                 result = this.EndRead(asyncResult);
             }
             return result;
-#else
-            throw new InvalidOperationException();
-#endif
         }
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-#if MONOANDROID
+            if (!isMono)
+            {
+                throw new InvalidOperationException();
+            }
+
             using (var doneEvent = new ManualResetEventSlim())
             {
                 var asyncResult = this.BeginWrite(buffer, offset, count, ar => ((ManualResetEventSlim)ar.AsyncState).Set(), doneEvent);
                 doneEvent.Wait();
                 this.EndWrite(asyncResult);
             }
-#else
-            throw new InvalidOperationException();
-#endif
         }
 
         public override long Seek(long offset, SeekOrigin origin)
