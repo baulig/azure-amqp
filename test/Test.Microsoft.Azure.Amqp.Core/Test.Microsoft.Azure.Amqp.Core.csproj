@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\TestAmqpBroker\TestAmqpBroker.cs;..\Test.Microsoft.Amqp\Common\*.cs;..\Test.Microsoft.Amqp\TestCases\AmqpCodecTests.cs;..\Test.Microsoft.Amqp\TestCases\UtilityTests.cs;..\Test.Microsoft.Amqp\TestCases\AmqpTransportTests.cs;..\Test.Microsoft.Amqp\TestCases\AmqpMessageTests.cs;..\Test.Microsoft.Amqp\TestCases\AmqpLinkTests.cs" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
+    <Compile Include="..\TestAmqpBroker\TestAmqpBroker.cs;..\Test.Microsoft.Amqp\Common\*.cs;..\Test.Microsoft.Amqp\TestCases\AmqpCodecTests.cs;..\Test.Microsoft.Amqp\TestCases\UtilityTests.cs;..\Test.Microsoft.Amqp\TestCases\AmqpTransportTests.cs;..\Test.Microsoft.Amqp\TestCases\AmqpMessageTests.cs;..\Test.Microsoft.Amqp\TestCases\AmqpLinkTests.cs" Exclude="bin\**;obj\**;packages\**" />
   </ItemGroup>
 
   <ItemGroup>
