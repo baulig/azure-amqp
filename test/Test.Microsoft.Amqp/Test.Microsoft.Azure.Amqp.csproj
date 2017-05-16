@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Test.Microsoft.Azure.Amqp</RootNamespace>
     <AssemblyName>Test.Microsoft.Azure.Amqp</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -34,9 +34,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Azure.Amqp">
-      <HintPath>..\..\Microsoft.Azure.Amqp\bin\Debug\net45\Microsoft.Azure.Amqp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
@@ -72,6 +69,10 @@
     <ProjectReference Include="..\TestAmqpBroker\TestAmqpBroker.csproj">
       <Project>{124a25c1-cfe3-47e5-8b0a-564fbcd6c319}</Project>
       <Name>TestAmqpBroker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Microsoft.Azure.Amqp\Microsoft.Azure.Amqp.csproj">
+      <Project>{A0D1C509-8C92-4AA1-983C-00E5254F8AE0}</Project>
+      <Name>Microsoft.Azure.Amqp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
