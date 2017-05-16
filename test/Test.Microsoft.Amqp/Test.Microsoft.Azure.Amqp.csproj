@@ -52,6 +52,15 @@
       <HintPath>..\..\packages\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Net.Security">
+      <HintPath>..\..\..\..\..\..\Library\Frameworks\Mono.framework\Versions\5.3.0\lib\mono\4.5\Facades\System.Net.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates">
+      <HintPath>..\..\..\..\..\..\Library\Frameworks\Mono.framework\Versions\5.3.0\lib\mono\4.5\Facades\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.ThreadPool">
+      <HintPath>..\..\..\..\..\..\Library\Frameworks\Mono.framework\Versions\5.3.0\lib\mono\4.5\Facades\System.Threading.ThreadPool.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\AmqpUtils.cs" />
