@@ -5,11 +5,13 @@ namespace Microsoft.Azure.Amqp
 {
     using System;
     using System.Threading;
-    
+
     abstract class TimeoutAsyncResult<T> : AsyncResult where T : class
     {
         readonly TimeSpan timeout;
+#if !NOTIMEOUT
         Timer timer;
+#endif
         int completed;
 #if DEBUG
         bool setTimerCalled;  // make sure derived class always call SetTimer
@@ -51,10 +53,12 @@ namespace Microsoft.Azure.Amqp
 
         protected void CompleteSelf(bool syncComplete, Exception exception)
         {
+#if !NOTIMEOUT
             if (this.timer != null)
             {
                 this.timer.Change(Timeout.Infinite, Timeout.Infinite);
             }
+#endif
 
             this.CompleteInternal(syncComplete, exception);
         }
