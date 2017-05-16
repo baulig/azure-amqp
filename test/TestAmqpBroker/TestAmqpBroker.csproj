@@ -9,9 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestAmqpBroker</RootNamespace>
     <AssemblyName>TestAmqpBroker</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,7 +34,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Azure.Amqp">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Microsoft.Azure.Amqp\bin\Debug\net45\Microsoft.Azure.Amqp.dll</HintPath>
     </Reference>
     <Reference Include="System" />

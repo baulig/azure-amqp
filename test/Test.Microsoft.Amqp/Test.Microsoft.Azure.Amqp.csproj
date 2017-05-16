@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Test.Microsoft.Azure.Amqp</RootNamespace>
     <AssemblyName>Test.Microsoft.Azure.Amqp</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -35,7 +35,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Azure.Amqp">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Microsoft.Azure.Amqp\bin\Debug\net45\Microsoft.Azure.Amqp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
