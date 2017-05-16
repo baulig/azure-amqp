@@ -5,6 +5,8 @@ namespace Microsoft.Azure.Amqp.Transport
 {
     using System;
     using System.Net;
+    using System.Net.Sockets;
+    using System.Collections.Generic;
     using System.Security.Authentication;
     using System.Security.Cryptography.X509Certificates;
     using Microsoft.Azure.Amqp.X509;
@@ -21,6 +23,11 @@ namespace Microsoft.Azure.Amqp.Transport
         OperationState writeState;
         OperationState readState;
 
+        static int nextID;
+        public readonly int ID = ++nextID;
+
+        static List<Socket> sockets = new List<Socket>(); 
+
         public TlsTransport(TransportBase innerTransport, TlsTransportSettings tlsSettings)
             : base("tls", innerTransport.Identifier)
         {
@@ -31,6 +38,16 @@ namespace Microsoft.Azure.Amqp.Transport
             this.sslStream = tlsSettings.CertificateValidationCallback == null ?
                 new CustomSslStream(new TransportStream(this.innerTransport), false, tlsSettings.IsInitiator) :
                 new CustomSslStream(new TransportStream(this.innerTransport), false, tlsSettings.CertificateValidationCallback, tlsSettings.IsInitiator);
+
+            Console.WriteLine("TLS TRANSPORT: {0}", ID);
+
+            var tcp = (TcpTransport)innerTransport;
+            if (sockets.Contains(tcp.Socket))
+            {
+                Console.WriteLine("MID-AIR COLLISION!");
+                throw new NotSupportedException("MID-AIR COLLISION!");
+            }
+            sockets.Add(tcp.Socket);
         }
 
         public override EndPoint LocalEndPoint
@@ -117,6 +134,7 @@ namespace Microsoft.Azure.Amqp.Transport
 
         protected override bool OpenInternal()
         {
+            Console.WriteLine("TLS TRANSPORT - OPEN: {0}", ID);
             IAsyncResult result;
             if (this.tlsSettings.IsInitiator)
             {

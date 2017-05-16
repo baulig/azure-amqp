@@ -23,6 +23,11 @@ namespace Microsoft.Azure.Amqp.Transport
         readonly ReadAsyncEventArgs receiveEventArgs;
         ITransportMonitor monitor;
 
+        static int nextId;
+        public readonly int ID = ++nextId;
+
+        public Socket Socket => socket;
+
         public TcpTransport(Socket socket, TcpTransportSettings transportSettings)
             : base("tcp")
         {
@@ -38,6 +43,7 @@ namespace Microsoft.Azure.Amqp.Transport
             this.receiveEventArgs = new ReadAsyncEventArgs(transportSettings.ReceiveBufferSize);
             this.receiveEventArgs.Completed += onReadComplete;
             this.receiveEventArgs.Transport = this;
+            Console.WriteLine("TT CTOR: {0} {1} {2}", ID, localEndPoint, remoteEndPoint);
         }
 
         public override EndPoint LocalEndPoint
@@ -102,6 +108,7 @@ namespace Microsoft.Azure.Amqp.Transport
             Fx.Assert(this.receiveEventArgs.Args == null, "read is pending");
 
             ByteBuffer readBuffer = this.receiveEventArgs.PrepareRead(args.Count);
+            Console.WriteLine("TT READ ASYNC: {0} {1} {2}", ID, args.Count, readBuffer != null);
             if (readBuffer != null)
             {
                 // ensure the buffer is not reclaimed while read is pending
@@ -127,9 +134,11 @@ namespace Microsoft.Azure.Amqp.Transport
             try
             {
                 pending = this.socket.ReceiveAsync(this.receiveEventArgs);
+                Console.WriteLine("TT READ ASYNC #1: {0} {1}", ID, pending);
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine("TT READ ASYNC EX: {0} {1}", ID, ex);
                 if (readBuffer != null)
                 {
                     readBuffer.Dispose();
@@ -221,6 +230,7 @@ namespace Microsoft.Azure.Amqp.Transport
         void HandleReadComplete(TransportAsyncCallbackArgs args, bool fromCache, bool completedSynchronously)
         {
             ByteBuffer readBuffer = this.receiveEventArgs.UserToken as ByteBuffer;
+            Console.WriteLine("TT HRC: {0} {1} {2}", ID, receiveEventArgs.SocketError, receiveEventArgs.BytesTransferred);
             try
             {
                 if (this.receiveEventArgs.SocketError == SocketError.Success)
